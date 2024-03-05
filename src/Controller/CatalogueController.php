@@ -8,23 +8,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CatalogueController extends AbstractController
 {
-    #[Route('/catalogue/des', name: 'app_des')]
-    public function des(): Response
+    #[Route('/catalogue', name: 'app_catal')]
+    public function catalogue(): Response
     {
-        return $this->render('catalogue/des.html.twig', [
+        return $this->render('catalogue/catalogue.html.twig', [
         ]);
     }
-
-        #[Route('/catalogue/minis', name: 'app_minis')]
-    public function minis(): Response
+    #[Route('/catalogue/{name}', name: 'app_catal_search')]
+    public function catalogueSearch(): Response
     {
-        return $this->render('catalogue/minis.html.twig', [
-        ]);
-    }
-    #[Route('/catalogue/cartes', name: 'app_cartes')]
-    public function cartes(): Response
-    {
-        return $this->render('catalogue/cartes.html.twig', [
+        return $this->render('catalogue/catalogue.html.twig', [
         ]);
     }
     #[Route('/catalogue/sessions', name: 'app_sessions')]
