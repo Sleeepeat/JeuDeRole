@@ -5,10 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Categorie;
+use App\Entity\Produit;
 
 class CatalogueController extends AbstractController
 {
-    #[Route('/catalogue', name: 'app_catal')]
+    #[Route('/mod-catalogue', name: 'app_catal')]
     public function catalogue(): Response
     {
         return $this->render('catalogue/catalogue.html.twig', [
@@ -26,7 +28,7 @@ class CatalogueController extends AbstractController
         return $this->render('catalogue/sessions.html.twig', [
         ]);
     }
-    #[Route('/catalogue/panier', name: 'app_panier')]
+    #[Route('/private-catalogue/panier', name: 'app_panier')]
     public function panier(): Response
     {
         return $this->render('catalogue/panier.html.twig', [

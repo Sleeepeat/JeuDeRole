@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{{parent()}}Votre Profil
+{% endblock %}
+{% block body %}
+
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">Votre Profil</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 p-4 m-0 text-primary">
+
+            <h4>Email : {{app.user.email}}</h4>
+            <h4>Nom : {{app.user.nom}}</h4>
+            <h4>Prenom : {{app.user.prenom}} </h4>    
+            <h4>Date d'inscription : {{app.user.dateEnvoi|date("d-m-Y à H:i:s")}}</h4>    
+            {% if "ROLE_ADMIN" in app.user.roles %}
+                <h4>Role : Administrateur</h4>
+                {% elseif "ROLE_MOD" in app.user.roles %}
+                <h4>Role : Modérateur</h4>
+                {% else %}
+                <h4>Role : Utilisateur</h4>
+                {% endif %}
+            </h4>
+
+        </div>
+    </div>
+
+</body>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{{parent()}}Liste des Utilisateurs
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">
+        Liste des produit</h1>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 p-4 m-0 text-primary">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="fw-bold text-primary">
+                            <th scope="col">Nom Produit</th>
+                            <th scope="col">Prix Produit</th>
+                            <th scope="col">description Produit</th>
+                            <th scope="col">quantitée Produit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produit in produit |sort((a, b) => a.prixProduit <=> b.prixProduit) %}
+                            <tr class="{{ cycle(['table-primary','table-secondary'], loop.index0) }}">
+                                <td>{{ produit.nomProduit | capitalize }}</td>
+                                <td>{{ produit.prixProduit }}</td>
+                                <td>{{ produit.descriptionProduit}}</td>
+                                <td>{{ produit.quantitee }}</td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

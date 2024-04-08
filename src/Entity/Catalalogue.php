@@ -17,12 +17,6 @@ class Catalalogue
     #[ORM\Column(length: 50)]
     private ?string $Nom = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $Prix = null;
-
-    #[ORM\Column(type: Types::BLOB)]
-    private $Image;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -36,30 +30,6 @@ class Catalalogue
     public function setNom(string $Nom): static
     {
         $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getPrix(): ?int
-    {
-        return $this->Prix;
-    }
-
-    public function setPrix(int $Prix): static
-    {
-        $this->Prix = $Prix;
-
-        return $this;
-    }
-
-    public function getImage()
-    {
-        return $this->Image;
-    }
-
-    public function setImage($Image): static
-    {
-        $this->Image = $Image;
 
         return $this;
     }
