@@ -15,8 +15,9 @@
                         <tr class="fw-bold text-primary">
                             <th scope="col">Nom Produit</th>
                             <th scope="col">Prix Produit</th>
-                            <th scope="col">description Produit</th>
-                            <th scope="col">quantitée Produit</th>
+                            <th scope="col">Description Produit</th>
+                            <th scope="col">Quantitée Produit</th>
+                            <th scope="col">Modifier</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,7 @@
                                 <td>{{ produit.prixProduit }}</td>
                                 <td>{{ produit.descriptionProduit}}</td>
                                 <td>{{ produit.quantitee }}</td>
+                                <td><a href="{{path("app_modifier_produit",{'id':produit.id})}}"><i class="bi bi-pen-fill text-dark"></i></a></td>
                             </tr>
                             {% endfor %}
                     </tbody>

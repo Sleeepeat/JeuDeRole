@@ -10,7 +10,7 @@ use App\Entity\Produit;
 
 class CatalogueController extends AbstractController
 {
-    #[Route('/mod-catalogue', name: 'app_catal')]
+    #[Route('/private-catalogue', name: 'app_catal')]
     public function catalogue(): Response
     {
         return $this->render('catalogue/catalogue.html.twig', [
