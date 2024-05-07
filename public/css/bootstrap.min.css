@@ -133,10 +133,7 @@
     --bs-form-invalid-color: #f57a00;
     --bs-form-invalid-border-color: #f57a00
 }
-body{
-    background-image: url('/JeuDeRole/images/background.png');
-    background-size: cover;
-}
+
 
 [data-bs-theme=dark] {
     color-scheme: dark;

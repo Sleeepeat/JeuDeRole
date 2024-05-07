@@ -2,11 +2,7 @@
 {% block title %}{{parent()}}Accueil{% endblock %}
 {% block body %}
 <body class="fizban">
-
-<img src="{{ asset('./images/background.png')}}" width="100%">
-
-
-    
+       <h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> Bienvenue</h1>
     <div id="carouselExampleAutoplaying" class="carousel slide container" width="100%" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -35,8 +31,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> Bienvenue</h1>
-<h2 class="text-center text-primary "> JeuDeRole, Une Boutique par des passionés pour passionés</h2>
+        
+     
 </body>
         {% endblock %}
         {% block javascripts %}

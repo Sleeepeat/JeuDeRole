@@ -12,7 +12,6 @@ use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Repository\UserRepository;
 
 class ContactController extends AbstractController
 {
@@ -43,4 +42,14 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/mod-supprimer-contact/{id}', name: 'app_supprimer_contact')]
+public function supprimercontact(Request $request,contact $contact,EntityManagerInterface $em): Response
+{
+if($contact!=null){
+$em->remove($contact);
+$em->flush();
+$this->addFlash('notice','contact supprimé');
+}
+return $this->redirectToRoute('app_liste_contact');
+}
 }

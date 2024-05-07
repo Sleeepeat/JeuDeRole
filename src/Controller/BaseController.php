@@ -30,8 +30,8 @@ class BaseController extends AbstractController
         return $this->render('base/liste-users.html.twig', ['user' => $user]);
     }
     #[Route('/mod-modifier-user/{id}', name: 'app_modifier_user')]
-    public function modifieruser(Request $request ,User $user, EntityManagerInterface $em): Response
-    {   
+    public function modifieruser(Request $request, User $user, EntityManagerInterface $em): Response
+    {
         $form = $this->createForm(ModifierUserType::class, $user);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -43,10 +43,17 @@ class BaseController extends AbstractController
             }
         }
         return $this->render('base/modifier-user.html.twig', ['form' => $form->createView()]);
-         
-        
-    
-}
+    }
+    #[Route('/mod-supprimer-produit/{id}', name: 'app_supprimer_user')]
+    public function supprimeruser(Request $request, user $user, EntityManagerInterface $em): Response
+    {
+        if ($user != null) {
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('notice', 'utilisateur supprimé');
+        }
+        return $this->redirectToRoute('app_list_user');
+    }
     #[Route('/private-profil', name: 'app_Profil')]
     public function Profil(UserRepository $userRepository): Response
     {
@@ -58,7 +65,7 @@ class BaseController extends AbstractController
         Request $request,
         ProduitRepository $produitRepository,
         EntityManagerInterface $em
-        ): Response {
+    ): Response {
         $produit = $produitRepository->findAll();
         return $this->render('base/liste-produit.html.twig', ['produit' => $produit]);
     }
@@ -80,8 +87,8 @@ class BaseController extends AbstractController
         return $this->render('base/ajout-produit.html.twig', ['form' => $form->createView()]);
     }
     #[Route('/mod-modifier-produit/{id}', name: 'app_modifier_produit')]
-    public function modifierproduit(Request $request ,produit $produit, EntityManagerInterface $em): Response
-    {   
+    public function modifierproduit(Request $request, produit $produit, EntityManagerInterface $em): Response
+    {
         $form = $this->createForm(ModifierProduitType::class, $produit);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -93,6 +100,15 @@ class BaseController extends AbstractController
             }
         }
         return $this->render('base/modifier-produit.html.twig', ['form' => $form->createView()]);
-   
-}
+    }
+    #[Route('/mod-supprimer-produit/{id}', name: 'app_supprimer_produit')]
+    public function supprimerProduit(Request $request, Produit $produit, EntityManagerInterface $em): Response
+    {
+        if ($produit != null) {
+            $em->remove($produit);
+            $em->flush();
+            $this->addFlash('notice', 'Produit supprimé');
+        }
+        return $this->redirectToRoute('app_list_produit');
+    }
 }

@@ -17,6 +17,7 @@
                             <th scope="col">Date de Création</th>
                             <th scope="col">Rôles</th>
                             <th scope="col">Modification</th>
+                            <th scope="col">Supression</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,7 @@
                                 </td>
                                 {% endif %}
                             <td><a href="{{path("app_modifier_user",{'id':user.id})}}"><i class="bi bi-pen-fill text-dark"></i></a></td>
+                            <td><a href="{{path("app_supprimer_user",{'id':user.id})}}"><i class="bi bi-trash-fill text-dark"></i></a></td>
                         </tr>
                             {% endfor %}                    
                     </tbody>

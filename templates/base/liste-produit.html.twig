@@ -18,6 +18,7 @@
                             <th scope="col">Description Produit</th>
                             <th scope="col">Quantitée Produit</th>
                             <th scope="col">Modifier</th>
+                            <th scope="col">Suprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,7 @@
                                 <td>{{ produit.descriptionProduit}}</td>
                                 <td>{{ produit.quantitee }}</td>
                                 <td><a href="{{path("app_modifier_produit",{'id':produit.id})}}"><i class="bi bi-pen-fill text-dark"></i></a></td>
+                                <td><a href="{{path("app_supprimer_produit",{'id':produit.id})}}"><i class="bi bi-trash-fill text-dark"></i></a></td>
                             </tr>
                             {% endfor %}
                     </tbody>
