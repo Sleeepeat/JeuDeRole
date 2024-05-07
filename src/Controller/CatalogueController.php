@@ -9,6 +9,7 @@ use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Categorie;
+use App\Entity\Panier;
 use App\Entity\Produit;
 
 class CatalogueController extends AbstractController
@@ -25,7 +26,7 @@ class CatalogueController extends AbstractController
         return $this->render('catalogue/sessions.html.twig', [
         ]);
     }
-    #[Route('/private-catalogue/panier', name: 'app_panier')]
+    #[Route('/private-panier', name: 'app_panier')]
     public function panier(): Response
     {
         return $this->render('catalogue/panier.html.twig', [

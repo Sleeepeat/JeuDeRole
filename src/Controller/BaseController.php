@@ -111,4 +111,10 @@ class BaseController extends AbstractController
         }
         return $this->redirectToRoute('app_list_produit');
     }
+    #[Route('/mention-legales', name: 'app_legales')] // /base est l’URL de la page, name est le nom de la route
+    public function mentionLegales(): Response
+    {
+        return $this->render('base/legal.html.twig', [ // render est la fonction qui va chercher le fichier TWIG pour l’afficher
+        ]);
+    }
 }
