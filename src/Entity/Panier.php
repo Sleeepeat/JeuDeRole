@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
@@ -13,18 +15,70 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $IdUser = null;
+    #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+    #[ORM\OneToMany(targetEntity: Inserer::class, mappedBy: 'panier', orphanRemoval: true)]
+    private Collection $inserers;
+
+    public function __construct()
+    {
+        $this->inserers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(?User $Id): static
+    public function getUser(): ?User
     {
-        $this->Id = $Id;
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setPanier(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getPanier() !== $this) {
+            $user->setPanier($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inserer>
+     */
+    public function getInserers(): Collection
+    {
+        return $this->inserers;
+    }
+
+    public function addInserer(Inserer $inserer): static
+    {
+        if (!$this->inserers->contains($inserer)) {
+            $this->inserers->add($inserer);
+            $inserer->setPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInserer(Inserer $inserer): static
+    {
+        if ($this->inserers->removeElement($inserer)) {
+            // set the owning side to null (unless already changed)
+            if ($inserer->getPanier() === $this) {
+                $inserer->setPanier(null);
+            }
+        }
 
         return $this;
     }

@@ -45,11 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\OneToMany(targetEntity: Panier::class, mappedBy: 'Id', orphanRemoval: true)]
-    private Collection $paniers;
+    private Collection $Panier;
 
     public function __construct()
     {
-        $this->paniers = new ArrayCollection();
+        $this->Panier = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,15 +166,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Panier>
      */
-    public function getPaniers(): Collection
+    public function getPanier(): Collection
     {
-        return $this->paniers;
+        return $this->Panier;
     }
 
     public function addPanier(Panier $panier): static
     {
-        if (!$this->paniers->contains($panier)) {
-            $this->paniers->add($panier);
+        if (!$this->Panier->contains($panier)) {
+            $this->Panier->add($panier);
             $panier->setId($this);
         }
 
@@ -183,7 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removePanier(Panier $panier): static
     {
-        if ($this->paniers->removeElement($panier)) {
+        if ($this->Panier->removeElement($panier)) {
             // set the owning side to null (unless already changed)
             if ($panier->getId() === $this) {
                 $panier->setId(null);

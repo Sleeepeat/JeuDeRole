@@ -43,13 +43,13 @@ class ContactController extends AbstractController
         ]);
     }
     #[Route('/mod-supprimer-contact/{id}', name: 'app_supprimer_contact')]
-public function supprimercontact(Request $request,contact $contact,EntityManagerInterface $em): Response
-{
-if($contact!=null){
-$em->remove($contact);
-$em->flush();
-$this->addFlash('notice','contact supprimé');
-}
-return $this->redirectToRoute('app_liste_contact');
-}
+    public function supprimercontact(Request $request, contact $contact, EntityManagerInterface $em): Response
+    {
+        if ($contact != null) {
+            $em->remove($contact);
+            $em->flush();
+            $this->addFlash('notice', 'contact supprimé');
+        }
+        return $this->redirectToRoute('app_liste_contacts');
+    }
 }
