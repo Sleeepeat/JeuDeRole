@@ -162,34 +162,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Panier>
-     */
-    public function getPanier(): Collection
-    {
-        return $this->Panier;
-    }
-
-    public function addPanier(Panier $panier): static
-    {
-        if (!$this->Panier->contains($panier)) {
-            $this->Panier->add($panier);
-            $panier->setId($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Panier $panier): static
-    {
-        if ($this->Panier->removeElement($panier)) {
-            // set the owning side to null (unless already changed)
-            if ($panier->getId() === $this) {
-                $panier->setId(null);
-            }
-        }
-
-        return $this;
-    }
 }
