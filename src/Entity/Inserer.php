@@ -16,13 +16,14 @@ class Inserer
     #[ORM\Column]
     private ?int $quantite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'inserers')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Panier $panier = null;
+   
 
     #[ORM\ManyToOne(inversedBy: 'inserers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
+
+    #[ORM\ManyToOne(inversedBy: 'inserers')]
+    private ?Panier $panier = null;
 
     public function getId(): ?int
     {
@@ -41,17 +42,7 @@ class Inserer
         return $this;
     }
 
-    public function getPanier(): ?Panier
-    {
-        return $this->panier;
-    }
-
-    public function setPanier(?Panier $panier): static
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
+  
 
     public function getProduit(): ?Produit
     {
@@ -61,6 +52,18 @@ class Inserer
     public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
 
         return $this;
     }

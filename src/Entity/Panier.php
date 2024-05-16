@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Produit;
 use App\Repository\PanierRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,17 +20,36 @@ class Panier
     #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(targetEntity: Inserer::class, mappedBy: 'panier', orphanRemoval: true)]
-    private Collection $inserers;
+    /**
+     * @var Collection<int, Inserer>
+     */
+    #[ORM\OneToMany(targetEntity: Inserer::class, mappedBy: 'panier')]
+    private Collection $inserer;
 
     public function __construct()
     {
-        $this->inserers = new ArrayCollection();
+        $this->inserer = new ArrayCollection();
     }
 
-    public function getId(): ?int
+
+    
+    public function getId()
     {
         return $this->id;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+   
+    
+
+
+    public function addProduit(Produit $produit)
+    {
+        //array_push($this->produitsId, $produit->getId());
     }
 
     public function getUser(): ?User
@@ -56,15 +77,15 @@ class Panier
     /**
      * @return Collection<int, Inserer>
      */
-    public function getInserers(): Collection
+    public function getinserer(): Collection
     {
-        return $this->inserers;
+        return $this->inserer;
     }
 
     public function addInserer(Inserer $inserer): static
     {
-        if (!$this->inserers->contains($inserer)) {
-            $this->inserers->add($inserer);
+        if (!$this->inserer->contains($inserer)) {
+            $this->inserer->add($inserer);
             $inserer->setPanier($this);
         }
 
@@ -73,7 +94,7 @@ class Panier
 
     public function removeInserer(Inserer $inserer): static
     {
-        if ($this->inserers->removeElement($inserer)) {
+        if ($this->inserer->removeElement($inserer)) {
             // set the owning side to null (unless already changed)
             if ($inserer->getPanier() === $this) {
                 $inserer->setPanier(null);
@@ -82,4 +103,16 @@ class Panier
 
         return $this;
     }
+
+
+
+   
+
+    
+
+  
+
+    
+   
+
 }

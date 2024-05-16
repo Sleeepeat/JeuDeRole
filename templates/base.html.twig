@@ -20,7 +20,7 @@
 
            <a href="{{path('app_accueil')}}"><img src="{{ asset('./images/icone.png')}}" width="60px" href="{{path('app_accueil')}}"></a>
 
-            <a class="navbar-brand" href="{{path('app_accueil')}}">Accueil</a>
+            <a class="navbar-brand" href="{{path('app_accueil')}}">JeuDeRole</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,10 +37,12 @@
                             aria-haspopup="true" aria-expanded="false">Catalogue</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{path('app_catal')}}">Notre Catalogue</a>
-                            <a class="dropdown-item" href="{{path('app_sessions')}}">Nos Sessions En Ligne</a>
+                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% else %}
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Votre Panier</a>
-                        </div>
+                            <a class="dropdown-item" href="{{path("app_panier",{'id':app.user.id})}}">Panier</a>
+                            </div>
+                            {% endif %}
                     </li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
                     <li class="nav-item dropdown">
@@ -54,9 +56,6 @@
                         </div>
                     </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('contact')}}">Nous Contacter</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav me-auto">
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}

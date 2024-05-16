@@ -8,7 +8,7 @@
 		<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4">
 			{% for p in produits %}
 				<div class="col" style="border-radius: 25%;">
-					<div class="card pb-4 bg-secondary" style="text-align: center;">
+					<div class="card pb-8 bg-secondary" style="text-align: center;">
 						<div class="card-body">
 							<h5 class="card-header text-center text-dark">{{p.nomProduit}}</h5>
 							
@@ -17,11 +17,10 @@
 						{% if p.prixProduit == 0 %}
 							<h6 class="card-footer text-center text-dark">Gratuit</h6>
 						{% else %}
-							<h6 class="card-footer text-center text-dark">{{p.prixProduit}}
-								$</h6>
+							<h6 class="card-footer text-center text-dark">{{p.prixProduit}}€</h6>
 						{% endif %}
 						<div class="card-footer">
-							<a class="btn btn-lg btn-primary btn-text-aligne" href="{{path('app_panier')}}">Ajouter au panier</a>
+							<a class="btn btn-lg btn-primary btn-text-aligne" href="{{path('app_ajout_panier',{'id':p.id})}}">Ajouter au panier</a>
 						</div>
 					</div>
 				</div>

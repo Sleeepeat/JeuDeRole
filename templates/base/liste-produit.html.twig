@@ -22,10 +22,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for produit in produit |sort((a, b) => a.prixProduit <=> b.prixProduit) %}
+                        {% for produit in produit | sort((a, b) => a.prixProduit <=> b.prixProduit) %}
                             <tr class="{{ cycle(['table-primary','table-secondary'], loop.index0) }}">
                                 <td>{{ produit.nomProduit | capitalize }}</td>
-                                <td>{{ produit.prixProduit }}</td>
+                                <td>{{ produit.prixProduit }}€</td>
                                 <td>{{ produit.descriptionProduit}}</td>
                                 <td>{{ produit.quantitee }}</td>
                                 <td><a href="{{path("app_modifier_produit",{'id':produit.id})}}"><i class="bi bi-pen-fill text-dark"></i></a></td>

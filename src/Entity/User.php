@@ -44,13 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 30)]
     private ?string $prenom = null;
 
-    #[ORM\OneToMany(targetEntity: Panier::class, mappedBy: 'Id', orphanRemoval: true)]
-    private Collection $Panier;
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
 
-    public function __construct()
-    {
-        $this->Panier = new ArrayCollection();
-    }
+   
+
 
     public function getId(): ?int
     {
@@ -162,4 +160,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+  
+
+ 
+   
+
+   
+
+    
+
 }

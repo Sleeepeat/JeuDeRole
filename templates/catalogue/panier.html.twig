@@ -1,6 +1,36 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{parent()}}Panier{% endblock %}
+{% block title %}
+	{{parent()}}Panier
+{% endblock %}
 {% block body %}
-<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> Panier</h1>
- <h2 class="text-center text-secondary mb-4 pb-4 display-2">  </h2>
- {% endblock %}
+	<h6 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">
+	Votre Panier
+	</h6>
+	<div class="card-group g-4 pt-4">
+		<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4">
+			{% for i in app.user.panier.inserer | sort((a, b) => a.nomProduit <=> b.nomProduit) %}
+			
+				<div class="col" style="border-radius: 25%;">
+					<div class="card pb-4 bg-secondary" style="text-align: center;">
+						<div class="card-body">
+							<h5 class="card-header text-center text-dark">{{i.produit.nomProduit}}</h5>
+							
+							<p class="card-text text-dark">{{i.produit.descriptionProduit}}</p>
+						</div>
+						{% if i.produit.prixProduit == 0 %}
+							<h6 class="card-footer text-center text-dark">Gratuit</h6>
+						{% else %}
+							<h6 class="card-footer text-center text-dark">{{i.produit.prixProduit}}
+								$</h6>
+						{% endif %}
+						<div class="card-footer">
+							<a href="{{path("app_supprimer_produit_panier",{'id':i.id})}}">
+								<i class="bi bi-trash-fill text-dark"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

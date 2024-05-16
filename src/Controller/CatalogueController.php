@@ -2,15 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Repository\ProduitRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Categorie;
-use App\Entity\Panier;
+use App\Form\ImageProduitType;
+use App\Form\ProduitType;
 use App\Entity\Produit;
+use App\Entity\ImageProduit;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ProduitRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Entity\Panier;
+use App\Entity\Inserer;
+
 
 class CatalogueController extends AbstractController
 {
@@ -41,4 +48,5 @@ class CatalogueController extends AbstractController
         $produits = $produitRepository->findAll();
         return $this->render('catalogue/articles.html.twig', ['produits' => $produits]);
     }
+   
 }

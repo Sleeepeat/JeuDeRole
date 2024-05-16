@@ -18,10 +18,10 @@ use App\Form\ModifierUserType;
 class BaseController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')] // /base est l’URL de la page, name est le nom de la route
-    public function index(): Response
-    {
-        return $this->render('base/index.html.twig', [ // render est la fonction qui va chercher le fichier TWIG pour l’afficher
-        ]);
+    public function index(UserRepository $userRepository,User $user): Response
+    {   
+        $user = $userRepository->findAll();
+        return $this->render('base/index.html.twig', ['user' => $user]);
     }
     #[Route('/mod-liste-utilisateur', name: 'app_list_user')]
     public function listeUser(UserRepository $userRepository): Response
@@ -44,7 +44,7 @@ class BaseController extends AbstractController
         }
         return $this->render('base/modifier-user.html.twig', ['form' => $form->createView()]);
     }
-    #[Route('/mod-supprimer-produit/{id}', name: 'app_supprimer_user')]
+    #[Route('/mod-supprimer-utilisateur/{id}', name: 'app_supprimer_user')]
     public function supprimeruser(Request $request, user $user, EntityManagerInterface $em): Response
     {
         if ($user != null) {
