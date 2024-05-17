@@ -60,6 +60,8 @@ class PanierController extends AbstractController
             $em->persist($panier);
             $em->persist($this->getUser());
             $em->flush();
+            $this->addFlash('notice','produit ajouté au panier');
+            
         }
         return $this->redirectToRoute('app_catal');
     }
